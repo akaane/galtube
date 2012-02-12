@@ -1,4 +1,12 @@
 Galtube::Application.routes.draw do
+  resources :operators
+
+  resources :locations
+
+  resources :actors
+
+  resources :videos
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

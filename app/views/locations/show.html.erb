@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name en:</b>
+  <%= @location.name_en %>
+</p>
+
+<p>
+  <b>Name zh:</b>
+  <%= @location.name_zh %>
+</p>
+
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>

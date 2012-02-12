@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title en:</b>
+  <%= @video.title_en %>
+</p>
+
+<p>
+  <b>Title zh:</b>
+  <%= @video.title_zh %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @video.description %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @video.duration %>
+</p>
+
+<p>
+  <b>Published:</b>
+  <%= @video.published %>
+</p>
+
+<p>
+  <b>Hit:</b>
+  <%= @video.hit %>
+</p>
+
+<p>
+  <b>Actor:</b>
+  <%= @video.actor_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>

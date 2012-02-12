@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @operator.email %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @operator.password %>
+</p>
+
+
+<%= link_to 'Edit', edit_operator_path(@operator) %> |
+<%= link_to 'Back', operators_path %>
