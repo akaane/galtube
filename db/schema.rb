@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212110023) do
+ActiveRecord::Schema.define(:version => 20120212130141) do
 
   create_table "actors", :force => true do |t|
     t.string   "name_en"
     t.string   "name_zh"
-    t.datetime "birthday"
+    t.date     "birthday"
     t.integer  "location_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -41,11 +41,13 @@ ActiveRecord::Schema.define(:version => 20120212110023) do
   add_index "categories_videos", ["category_id", "video_id"], :name => "index_categories_videos_on_category_id_and_video_id", :unique => true
 
   create_table "covers", :force => true do |t|
-    t.string   "guid"
+    t.string   "binary_guid"
     t.string   "mime"
     t.integer  "length"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "locations", :force => true do |t|
@@ -55,11 +57,21 @@ ActiveRecord::Schema.define(:version => 20120212110023) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "reviews", :force => true do |t|
-    t.integer  "rank"
+  create_table "operators", :force => true do |t|
+    t.string   "email"
+    t.string   "password"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "reviews", :force => true do |t|
+    t.integer  "rank"
+    t.integer  "video_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "reviews", ["video_id"], :name => "index_reviews_on_video_id"
 
   create_table "tags", :force => true do |t|
     t.string   "name"
@@ -72,8 +84,11 @@ ActiveRecord::Schema.define(:version => 20120212110023) do
     t.string   "title_zh"
     t.text     "description"
     t.integer  "duration"
+    t.integer  "width"
+    t.integer  "height"
     t.boolean  "published"
-    t.integer  "hit"
+    t.integer  "hits"
+    t.string   "binary_guid"
     t.integer  "actor_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -89,15 +104,6 @@ ActiveRecord::Schema.define(:version => 20120212110023) do
   end
 
   add_index "videos_covers", ["cover_id", "video_id"], :name => "index_videos_covers_on_cover_id_and_video_id", :unique => true
-
-  create_table "videos_reviews", :id => false, :force => true do |t|
-    t.integer  "video_id",   :null => false
-    t.integer  "review_id",  :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "videos_reviews", ["review_id", "video_id"], :name => "index_videos_reviews_on_review_id_and_video_id", :unique => true
 
   create_table "videos_tags", :id => false, :force => true do |t|
     t.integer  "video_id",   :null => false

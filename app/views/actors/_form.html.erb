@@ -21,11 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :birthday %><br />
-    <%= f.datetime_select :birthday %>
+    <%= f.date_select :birthday%>
   </div>
   <div class="field">
     <%= f.label :location_id %><br />
-    <%= f.number_field :location_id %>
+	<%= f.select :location_id, locations_available %>
   </div>
   <div class="actions">
     <%= f.submit %>

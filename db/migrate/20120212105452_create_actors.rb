@@ -3,7 +3,7 @@ class CreateActors < ActiveRecord::Migration
     create_table :actors do |t|
       t.string :name_en
       t.string :name_zh
-      t.datetime :birthday
+      t.date :birthday
       t.integer :location_id
       t.timestamps
     end

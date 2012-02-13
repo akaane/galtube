@@ -28,17 +28,15 @@
     <%= f.number_field :duration %>
   </div>
   <div class="field">
-    <%= f.label :published %><br />
-    <%= f.check_box :published %>
-  </div>
-  <div class="field">
-    <%= f.label :hit %><br />
-    <%= f.number_field :hit %>
-  </div>
-  <div class="field">
     <%= f.label :actor_id %><br />
     <%= f.number_field :actor_id %>
   </div>
+<% unless @video.new_record? %>
+  <div class="field">
+    <%= f.label :hits %><br />
+    <%= f.number_field :hits %>
+  </div>
+<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

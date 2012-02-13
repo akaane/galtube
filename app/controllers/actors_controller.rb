@@ -73,7 +73,7 @@ class ActorsController < ApplicationController
   # DELETE /actors/1.json
   def destroy
     @actor = Actor.find(params[:id])
-    @actor.destroy
+    #@actor.destroy
 
     respond_to do |format|
       format.html { redirect_to actors_url }

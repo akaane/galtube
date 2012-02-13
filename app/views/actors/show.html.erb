@@ -1,23 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name en:</b>
-  <%= @actor.name_en %>
-</p>
-
-<p>
-  <b>Name zh:</b>
-  <%= @actor.name_zh %>
+  <b>Name:</b>
+  <%= @actor.name %>
 </p>
 
 <p>
   <b>Birthday:</b>
-  <%= @actor.birthday %>
+  <%= @actor.display_birthday %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%= @actor.location_id %>
+  <%= @actor.location.name %>
 </p>
 
 

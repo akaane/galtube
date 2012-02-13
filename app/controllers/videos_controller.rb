@@ -25,7 +25,8 @@ class VideosController < ApplicationController
   # GET /videos/new.json
   def new
     @video = Video.new
-
+    @video.duration = 60
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @video }
@@ -41,6 +42,7 @@ class VideosController < ApplicationController
   # POST /videos.json
   def create
     @video = Video.new(params[:video])
+    @video.published = false
 
     respond_to do |format|
       if @video.save

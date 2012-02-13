@@ -2,12 +2,10 @@
 
 <table>
   <tr>
-    <th>Title en</th>
-    <th>Title zh</th>
-    <th>Description</th>
+    <th>Title</th>
     <th>Duration</th>
     <th>Published</th>
-    <th>Hit</th>
+    <th>Hits</th>
     <th>Actor</th>
     <th></th>
     <th></th>
@@ -16,13 +14,11 @@
 
 <% @videos.each do |video| %>
   <tr>
-    <td><%= video.title_en %></td>
-    <td><%= video.title_zh %></td>
-    <td><%= video.description %></td>
-    <td><%= video.duration %></td>
-    <td><%= video.published %></td>
-    <td><%= video.hit %></td>
-    <td><%= video.actor_id %></td>
+    <td><%= video.title %></td>
+    <td><%= video.duration %>mins</td>
+    <td><%= video.published ? 'Yes' : 'No' %></td>
+    <td><%= video.hits %></td>
+    <td><%= video.actor.name %></td>
     <td><%= link_to 'Show', video %></td>
     <td><%= link_to 'Edit', edit_video_path(video) %></td>
     <td><%= link_to 'Destroy', video, confirm: 'Are you sure?', method: :delete %></td>

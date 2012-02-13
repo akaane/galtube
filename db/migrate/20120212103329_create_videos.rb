@@ -5,8 +5,11 @@ class CreateVideos < ActiveRecord::Migration
       t.string :title_zh
       t.text :description
       t.integer :duration
+      t.integer :width
+      t.integer :height
       t.boolean :published
-      t.integer :hit
+      t.integer :hits
+      t.string :binary_guid
       t.integer :actor_id
       t.timestamps
     end
