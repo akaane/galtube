@@ -7,6 +7,7 @@ class CreateVideos < ActiveRecord::Migration
       t.integer :duration
       t.integer :width
       t.integer :height
+      t.float :reviews
       t.boolean :published
       t.integer :hits
       t.string :binary_guid

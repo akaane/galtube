@@ -6,7 +6,9 @@ class CreateCovers < ActiveRecord::Migration
       t.integer :length
       t.integer :width
       t.integer :height
+      t.integer :video_id
       t.timestamps
     end
+    add_index :covers, :video_id
   end
 end

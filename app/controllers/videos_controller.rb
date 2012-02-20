@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  before_filter :fill_actor_selector, :only => [:new, :edit]
+  
   # GET /videos
   # GET /videos.json
   def index
@@ -82,4 +84,23 @@ class VideosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def destroy_cover
+    cover = Cover.find(params[:id])   
+    @video = cover.video
+    cover.destroy
+    
+    respond_to do |format|
+      format.html { redirect_to edit_url(:id => @video.id) }
+      format.json { head :no_content }
+    end
+  end
+  
+
+  private
+
+  def fill_actor_selector
+    @actors = Actor.all
+  end
+  
 end

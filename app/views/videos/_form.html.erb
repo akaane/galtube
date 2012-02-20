@@ -20,16 +20,20 @@
     <%= f.text_field :title_zh %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
     <%= f.label :duration %><br />
     <%= f.number_field :duration %>
   </div>
   <div class="field">
     <%= f.label :actor_id %><br />
-    <%= f.number_field :actor_id %>
+		<%= f.select :actor_id, actors_available %>
+  </div>
+  <div class="field">
+		<ol>
+			<% @video.covers.each do |c| %>
+				<li><span><%= image_tag c.uri, :class => "video_cover", :width => c.width, :height => c.height %></span>
+					<span><%= link_to "Delete", :action => "destroy_cover", :id => c.id %></span></li>
+			<% end %>
+		</ol>
   </div>
 <% unless @video.new_record? %>
   <div class="field">
@@ -37,6 +41,10 @@
     <%= f.number_field :hits %>
   </div>
 <% end %>
+	<div class="field">
+	  <%= f.label :reviews %><br />
+	  <%= f.number_field :reviews %>
+	</div>
   <div class="actions">
     <%= f.submit %>
   </div>
