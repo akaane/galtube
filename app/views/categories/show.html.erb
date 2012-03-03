@@ -1,0 +1,13 @@
+<h1>Videos in <%= @category.title %></h1>
+
+<div>
+  <ol>
+<% @category.avliable_videos.each do |video| %>
+    <li><div>
+		<%= image_tag video.main_cover.uri, :class => "video_cover", :width => video.main_cover.width, :height => video.main_cover.height %>
+  	<span><%= link_to "#{video.title}(#{video.actor.name})", "../videos/#{video.id}" %></span>
+    <span>Review<%= video.current_review %> @ <%= video.width %>*<%= video.height %></span>
+	  </div></li>
+<% end %>
+  </ol>
+</div>

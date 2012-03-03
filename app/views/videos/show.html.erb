@@ -1,18 +1,38 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <b>Title en:</b>
-  <%= @video.title_en %>
+  <b>Title:</b>
+  <%= @video.title %>
 </p>
 
 <p>
-  <b>Title zh:</b>
-  <%= @video.title_zh %>
+  <b>Covers:</b>
+	<ol>
+		<% @video.covers.each do |c| %>
+			<li><%= image_tag c.uri, :class => "video_cover", :width => c.width, :height => c.height %></li>
+		<% end %>
+	</ol>
 </p>
 
 <p>
-  <b>Description:</b>
-  <%= @video.description %>
+  <b>Categories:</b>
+	<ol>
+		<% @video.categories.each do |c| %>
+			<li>c.title</li>
+		<% end %>
+	</ol>
+</p>
+
+<p>
+  <b>Tags:</b>
+	<ol>
+		<% @video.tags.each do |t| %>
+			<li>t.name</li>
+		<% end %>
+	</ol>
+</p>
+
+<p>
+  <b>binary_guid:</b>
+  <%= @video.binary_guid %>
 </p>
 
 <p>
@@ -21,8 +41,8 @@
 </p>
 
 <p>
-  <b>Published:</b>
-  <%= @video.published %>
+  <b>Resolution:</b>
+  <%= @video.resolution %>
 </p>
 
 <p>
@@ -32,14 +52,10 @@
 
 <p>
   <b>Reviews:</b>
-  <%= @video.reviews %>
+  <%= @video.current_review %>
 </p>
 
 <p>
   <b>Actor:</b>
-  <%= @video.actor_id %>
+  <%= @video.actor.name %>
 </p>
-
-<%= link_to 'Reviews', reviews_path(@video) %> |
-<%= link_to 'Edit', edit_video_path(@video) %> |
-<%= link_to 'Back', videos_path %>

@@ -16,7 +16,7 @@ class VideosController < ApplicationController
   # GET /videos/1.json
   def show
     @video = Video.find(params[:id])
-
+    format.html { redirect_to '/', notice: 'Video was successfully created.' } unless @video.published #TODO diskplay an error page here
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @video }
@@ -28,6 +28,8 @@ class VideosController < ApplicationController
   def new
     @video = Video.new
     @video.duration = 60
+    @video.width = 1280
+    @video.height = 720
     
     respond_to do |format|
       format.html # new.html.erb
@@ -44,11 +46,13 @@ class VideosController < ApplicationController
   # POST /videos.json
   def create
     @video = Video.new(params[:video])
-    @video.published = false
+    @video.published = true
+    @video.hits = 0
+    @video.current_review = 1
 
     respond_to do |format|
       if @video.save
-        format.html { redirect_to @video, notice: 'Video was successfully created.' }
+        format.html { redirect_to videos_path, notice: 'Video was successfully created.' }
         format.json { render json: @video, status: :created, location: @video }
       else
         format.html { render action: "new" }
@@ -64,7 +68,7 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       if @video.update_attributes(params[:video])
-        format.html { redirect_to @video, notice: 'Video was successfully updated.' }
+        format.html { redirect_to videos_path, notice: 'Video was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -95,8 +99,36 @@ class VideosController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
 
+  def publish
+    @video = Video.find(params[:id])
+    @video.published = true
+
+    respond_to do |format|
+      if @video.save
+        format.html { redirect_to videos_path, notice: 'Video was successfully published.' }
+        format.json { render json: @video, status: :created, location: @video }
+      else
+        format.html { redirect_to videos_path, notice: 'Video was not published, please try again later.' }
+        format.json { render json: @video.errors, status: :unprocessable_entity }
+      end
+    end
+  end  
+
+  def unpublish
+    @video = Video.find(params[:id])
+    @video.published = false
+
+    respond_to do |format|
+      if @video.save
+        format.html { redirect_to videos_path, notice: 'Video was successfully unpublished.' }
+        format.json { render json: @video, status: :created, location: @video }
+      else
+        format.html { redirect_to videos_path, notice: 'Video was not unpublished, please try again later.' }
+        format.json { render json: @video.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   private
 
   def fill_actor_selector

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212130141) do
+ActiveRecord::Schema.define(:version => 20120303152630) do
 
   create_table "actors", :force => true do |t|
     t.string   "name_en"
@@ -46,9 +46,12 @@ ActiveRecord::Schema.define(:version => 20120212130141) do
     t.integer  "length"
     t.integer  "width"
     t.integer  "height"
+    t.integer  "video_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "covers", ["video_id"], :name => "index_covers_on_video_id"
 
   create_table "locations", :force => true do |t|
     t.string   "name_en"
@@ -86,24 +89,16 @@ ActiveRecord::Schema.define(:version => 20120212130141) do
     t.integer  "duration"
     t.integer  "width"
     t.integer  "height"
+    t.integer  "current_review"
     t.boolean  "published"
     t.integer  "hits"
     t.string   "binary_guid"
     t.integer  "actor_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "videos", ["actor_id"], :name => "index_videos_on_actor_id"
-
-  create_table "videos_covers", :id => false, :force => true do |t|
-    t.integer  "video_id",   :null => false
-    t.integer  "cover_id",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "videos_covers", ["cover_id", "video_id"], :name => "index_videos_covers_on_cover_id_and_video_id", :unique => true
 
   create_table "videos_tags", :id => false, :force => true do |t|
     t.integer  "video_id",   :null => false

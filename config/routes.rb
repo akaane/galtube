@@ -7,6 +7,11 @@ Galtube::Application.routes.draw do
   resources :actors
 
   resources :videos
+  
+  resources :categories
+    
+  match 'videos/:id/publish' => 'videos#publish'
+  match 'videos/:id/unpublish' => 'videos#unpublish'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,22 +1,19 @@
 <h1>Listing actors</h1>
-
+<p id="notice"><%= notice %></p>
 <table>
   <tr>
+    <th></th>
     <th>Name</th>
-    <th>Birthday</th>
+    <th>Age</th>
     <th>Location</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @actors.each do |actor| %>
   <tr>
-    <td><%= actor.name %></td>
-    <td><%= actor.display_birthday %></td>
-    <td><%= actor.location.name %></td>
-    <td><%= link_to 'Show', actor %></td>
     <td><%= link_to 'Edit', edit_actor_path(actor) %></td>
+    <td><%= actor.name %></td>
+    <td><%= actor.age %></td>
+    <td><%= actor.location.name %></td>
     <td><% #link_to 'Destroy', actor, confirm: 'Are you sure?', method: :delete 
 	%></td>
   </tr>

@@ -3,11 +3,10 @@ class CreateVideos < ActiveRecord::Migration
     create_table :videos do |t|
       t.string :title_en
       t.string :title_zh
-      t.text :description
       t.integer :duration
       t.integer :width
       t.integer :height
-      t.float :reviews
+      t.integer :current_review
       t.boolean :published
       t.integer :hits
       t.string :binary_guid

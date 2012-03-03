@@ -10,17 +10,6 @@ class ActorsController < ApplicationController
     end
   end
 
-  # GET /actors/1
-  # GET /actors/1.json
-  def show
-    @actor = Actor.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @actor }
-    end
-  end
-
   # GET /actors/new
   # GET /actors/new.json
   def new
@@ -44,7 +33,7 @@ class ActorsController < ApplicationController
 
     respond_to do |format|
       if @actor.save
-        format.html { redirect_to @actor, notice: 'Actor was successfully created.' }
+        format.html { redirect_to actors_path, notice: 'Actor was successfully created.' }
         format.json { render json: @actor, status: :created, location: @actor }
       else
         format.html { render action: "new" }
@@ -60,7 +49,7 @@ class ActorsController < ApplicationController
 
     respond_to do |format|
       if @actor.update_attributes(params[:actor])
-        format.html { redirect_to @actor, notice: 'Actor was successfully updated.' }
+        format.html { redirect_to actors_path, notice: 'Actor was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

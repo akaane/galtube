@@ -4,7 +4,7 @@ class Video < ActiveRecord::Base
   
   belongs_to :actor
   has_and_belongs_to_many :categories
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, :join_table => "videos_tags", :foreign_key => "video_id"
   has_many :reviews
   has_many :covers
   
@@ -12,8 +12,13 @@ class Video < ActiveRecord::Base
     self.where(:published => true)
   end
   
-  def cover
-    covers.first #TODO here we should change into some nother business stratage.
+  def main_cover
+    return Cover.new
+    covers.first #TODO why first???
+  end
+  
+  def resolution
+    "#{width}*#{height}"
   end
   
 end
