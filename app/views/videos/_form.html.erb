@@ -24,6 +24,12 @@
 		<%= f.select :actor_id, actors_available %>
   </div>
   <div class="field">
+		<% Category.all.each do |category| %>
+		  <%= check_box_tag 'video[category_ids][]', category.id, @video.categories.include?(category) -%>
+		  <%= category.title %>
+		<% end %>
+  </div>
+  <div class="field">
 		<ol>
 			<% @video.covers.each do |c| %>
 				<li><span><%= image_tag c.uri, :class => "video_cover", :width => c.width, :height => c.height %></span>
