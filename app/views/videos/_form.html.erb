@@ -30,12 +30,16 @@
 		<% end %>
   </div>
   <div class="field">
-		<ol>
+		Covers:
+		<ol id="covers_field">
 			<% @video.covers.each do |c| %>
 				<li><span><%= image_tag c.uri, :class => "video_cover", :width => c.width, :height => c.height %></span>
-					<span><%= link_to "Delete", :action => "destroy_cover", :id => c.id %></span></li>
+					<span><%= link_to "Delete", :action => "destroy_cover", :id => c.binary_guid %></span></li>
 			<% end %>
 		</ol>
+		<div id="cover-uploader">       
+	    <noscript><p>Please enable JavaScript to use file uploader.</p></noscript>         
+		</div>
   </div>
   <div class="field">
     <%= f.label :width %><br />
@@ -60,8 +64,11 @@
 	</div>
 <% end %>
 	<div class="field">
-	  <%= f.label :binary_guid %><br />
-	  <%= f.text_field :binary_guid %>
+		<div id="torrent-uploader">       
+		  <noscript><p>Please enable JavaScript to use file uploader.</p></noscript>         
+		</div>
+		<%= f.hidden_field :binary_guid %>
+		<%= f.hidden_field :uploaded_cover_guids %>
 	</div>
   <div class="actions">
     <%= f.submit %>

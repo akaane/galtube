@@ -1,7 +1,7 @@
 module ExternalLinkable
   def uri
     return "" unless self.respond_to?(:binary_guid)
-    "http://xxx.com/binaries/#{binary_guid}" #TODO not implated
+    "http://localhost:3000/upload/#{binary_guid}" #TODO modify this before release
   end
   
 end

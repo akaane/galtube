@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303152630) do
+ActiveRecord::Schema.define(:version => 20120311101254) do
 
   create_table "actors", :force => true do |t|
     t.string   "name_en"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(:version => 20120303152630) do
   end
 
   add_index "actors", ["location_id"], :name => "index_actors_on_location_id"
+
+  create_table "binaries", :force => true do |t|
+    t.integer  "guid"
+    t.string   "name"
+    t.integer  "size",       :limit => 8
+    t.string   "mime"
+    t.binary   "data",       :limit => 16777215
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "binaries", ["guid"], :name => "index_binaries_on_guid"
 
   create_table "categories", :force => true do |t|
     t.string   "title_en"

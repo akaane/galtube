@@ -1,5 +1,11 @@
 Galtube::Application.routes.draw do
 
+  post "upload/cover"
+
+  post "upload/torrent"
+  
+  get "upload/:id" => 'upload#show'
+
   resources :operators
 
   resources :locations

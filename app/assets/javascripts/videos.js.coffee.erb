@@ -1,0 +1,37 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+$(document).ready () -> 
+	torrent_uploader = $('#torrent-uploader')?[0]
+	initialize_torrent_uploader torrent_uploader if torrent_uploader?
+	cover_uploader = $('#cover-uploader')?[0]
+	initialize_cover_uploader cover_uploader if cover_uploader?
+	
+initialize_torrent_uploader = (ele) ->
+	new qq.FileUploader {
+    element: ele,
+    action: '/upload/torrent',
+		allowedExtensions: ['torrent'],
+		onComplete: after_torrent_uploaded }
+			
+after_torrent_uploaded = (id, filename, json_response) ->
+	$('#video_binary_guid').val(json_response.guid)
+
+initialize_cover_uploader = (ele) ->
+	new qq.FileUploader {
+    element: ele,
+    action: '/upload/cover',
+		allowedExtensions: ['jpg','jpeg','gif','png'],
+		onComplete: after_cover_uploaded }
+
+after_cover_uploaded = (id, filename, json_response) ->
+		original_value = $('#video_uploaded_cover_guids').val()
+		original_value += ',' if original_value isnt ""
+		guid = json_response.guid
+		$('#video_uploaded_cover_guids').val("#{original_value}#{guid}")
+		new_cover_html = """
+										 <li><span><img class="video_cover" src="/upload/#{guid}" /></span>
+										 <span><a href="/videos/destroy_cover/#{guid}">Delete</span></li>
+										 """
+		$('#covers_field').append(new_cover_html)

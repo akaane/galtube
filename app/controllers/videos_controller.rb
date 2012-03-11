@@ -49,7 +49,7 @@ class VideosController < ApplicationController
     @video.published = true
     @video.hits = 0
     @video.current_review = 1
-
+    @video.attach_covers
     respond_to do |format|
       if @video.save
         format.html { redirect_to videos_path, notice: 'Video was successfully created.' }
@@ -65,9 +65,8 @@ class VideosController < ApplicationController
   # PUT /videos/1.json
   def update
     @video = Video.find(params[:id])
-
     respond_to do |format|
-      if @video.update_attributes(params[:video])
+      if @video.update_attributes(params[:video]) and @video.attach_covers
         format.html { redirect_to videos_path, notice: 'Video was successfully updated.' }
         format.json { head :no_content }
       else
@@ -129,8 +128,19 @@ class VideosController < ApplicationController
       end
     end
   end
-  private
 
+  def destroy_cover
+    cover = Cover.where(:binary_guid => params[:id]).first
+    respond_to do |format|
+      if cover and cover.delete
+        format.json { render json: { :success => true } }
+      else
+        format.json { render json: { :success => false } }
+      end
+    end
+  end
+
+  private
   def fill_actor_selector
     @actors = Actor.all
   end
