@@ -1,5 +1,7 @@
 Galtube::Application.routes.draw do
 
+  get "promotion/index"
+
   post "upload/cover"
 
   post "upload/torrent"

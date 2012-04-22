@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag    "fileuploader" %>
+<%= javascript_include_tag "fileuploader" %>
 <%= form_for(@video) do |f| %>
   <% if @video.errors.any? %>
     <div id="error_explanation">
