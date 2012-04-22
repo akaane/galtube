@@ -1,0 +1,37 @@
+<h1>Listing videos</h1>
+<p id="notice"><%= notice %></p>
+<table>
+  <tr>
+    <th></th>
+    <th>Title</th>
+    <th>Actor</th>
+    <th>Reviews</th>
+    <th>Hits</th>
+    <th>Duration</th>
+    <th>Resolution</th>
+    <th>Published</th>
+  </tr>
+
+<% @videos.each do |video| %>
+  <tr>
+    <td><%= link_to 'Edit', edit_video_path(video) %></td>
+    <td><%= link_to video.title, video %></td>
+    <td><%= video.actor.name %></td>
+    <td><%= video.current_review %></td>
+    <td><%= video.hits %></td>
+    <td><%= video.duration %>mins</td>
+    <td><%= video.resolution %></td>
+		<td>
+		<% if video.published %>
+		<%= link_to 'Published', "videos/#{video.id}/unpublish" %>
+		<%else%>
+		<%= link_to 'NOT published', "videos/#{video.id}/publish" %>
+		<%end%>
+		</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Video', new_video_path %>
